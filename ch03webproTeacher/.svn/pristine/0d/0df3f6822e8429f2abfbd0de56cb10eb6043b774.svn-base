@@ -1,0 +1,47 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.webjjang.board.dto.BoardDTO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// list 객체 만들고 BoardDTO에 데이터를 채워서 list 담아서 -> 강제로 데이터 담기
+List<BoardDTO> list = new ArrayList<>();
+list.add(new BoardDTO(10,"자바란?", "이영환","2018-03-21", 10));
+list.add(new BoardDTO(9,"JSP란?", "홍다운","2018-03-2001", 15));
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/board.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판:리시트</title>
+</head>
+<body>
+<h1>게시판 리스트</h1>
+<table>
+<tr>
+	<th>번호</th>
+	<th>제목</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>조회수</th>
+</tr>
+<% for(BoardDTO boardDTO : list){ %>
+<tr onclick="location='view.jsp?no=<%= boardDTO.getNo() %>'"
+ style="cursor: pointer;">
+	<td><%= boardDTO.getNo() %></td>
+	<td><%= boardDTO.getTitle() %></td>
+	<td><%= boardDTO.getWriter() %></td>
+	<td><%= boardDTO.getWriteDate() %></td>
+	<td><%= boardDTO.getHit() %></td>
+</tr>
+<%} // end of for %>
+<tr>
+	<td colspan="5" class="justRight">
+		<button onclick="location='write.jsp'">글쓰기</button>
+	</td>
+</tr>
+</table>
+</body>
+</html>

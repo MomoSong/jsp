@@ -1,0 +1,6 @@
+@charset "UTF-8";
+th, td {border: 1px solid #888; padding: 2px 5px;}
+th{background: black; color: white;}
+.justLeft{text-align: left;}
+.justCenter{text-align: center;}
+.justRight{text-align: right;}
