@@ -3,9 +3,12 @@
 <%@page import="com.webjjang.board.service.BoardListService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <%
 	BoardListService boardListService = new BoardListService();
 	List<BoardDTO> list = boardListService.process();
+	request.setAttribute("list", list);
 %>
 <!DOCTYPE HTML>
 <html>
@@ -23,6 +26,9 @@
 // 			alert("click");
 // 			alert(no);
 			location = "view.jsp?no="+no;
+		});
+		$("#write").click(function(){
+			location = "writeForm.jsp";
 		});
 	});
 </script>
@@ -42,16 +48,23 @@
 			
 		</thead>
 		<tbody>
-		<%for(BoardDTO boardDTO: list){ %>
+		<c:forEach items="${list }" var="boardDTO">
 		<tr class="data">
-			<td><%= boardDTO.getNo() %></td>
-			<td><%= boardDTO.getTitle()%></td>
-			<td><%= boardDTO.getWriter()%></td>
-			<td><%= boardDTO.getWriteDate()%></td>
-			<td><%= boardDTO.getHit()%></td>
+			<td>${boardDTO.no }</td>
+			<td>${boardDTO.title }</td>
+			<td>${boardDTO.writer }</td>
+			<td>${boardDTO.writeDate }</td>
+			<td>${boardDTO.hit }</td>
 		</tr>
-		<%} %>
+		</c:forEach>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan = "5">
+					<button id="write" >글쓰기</button>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 </body>
 </html>
