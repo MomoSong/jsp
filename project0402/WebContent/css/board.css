@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/*테이블 가운데 정렬, 너비 600 */
+table{margin: 0 auto; width: 600px}
+.justCenter{text-align: center;}
+td, th{border: 1px solid #888; padding: 2px 5px;}
+th{color: white; background: black;}
+
+.data:hover {
+	background: #eee;
+	cursor: pointer;
+	color: #00ff40;
+}
+
+.data th, .data td:not(.justLeft){ text-align: center;}
+.justLeft{text-align: left;}
