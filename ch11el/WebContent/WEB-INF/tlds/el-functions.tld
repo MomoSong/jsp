@@ -5,7 +5,19 @@
 							http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 	
-		
+	<description>EL에서 함수 실행</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>ELfunctions</short-name>
+	
+<!-- 	함수 정의	 -->
+	<function>
+		<description>숫자 포맷팅</description>
+		<name>formatNumber</name>
+		<function-class>util.FormatUtil</function-class>
+		<function-signature>
+			java.lang.String number(long, java.lang.String)
+		</function-signature>
+	</function>
 	
 	
 </taglib>							
