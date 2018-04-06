@@ -22,7 +22,7 @@
 // 		alert("ok!");
 		//버튼 이벤트 처리
 		$("#update").click(function(){
-			location="update.jsp?no="+$("#td_no").text();
+			location="updateForm.jsp?no="+$("#td_no").text();
 		});
 		$("#delete").click(function(){
 			if(confirm("정말 삭제하시겠습니까?"))

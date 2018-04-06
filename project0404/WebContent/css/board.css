@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+td, th{
+	border: 1px solid #888;
+	margin: 2px 5px;
+}
+th{
+	background: black;
+	color: white;
+}
+table{
+	width: 600px;
+	margin: 0 auto;
+}
+
+.data:hover {
+	cursor: pointer;
+	color: #eee;
+}

@@ -1,0 +1,68 @@
+<%@page import="com.webjjang.board.dto.BoardDTO"%>
+<%@page import="com.webjjang.board.service.BoardViewService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%
+//데이터를 받는다.
+int no = Integer.parseInt(request.getParameter("no"));
+//글보기에서 복사해 온다.
+BoardViewService boardViewService = new BoardViewService();
+BoardDTO boardDTO = boardViewService.process(Integer.parseInt(request.getParameter("no")));
+request.setAttribute("boardDTO", boardDTO);
+%>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게시판 글수정</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+// 		alert("ok!");
+		//버튼 이벤트 처리
+		
+		$("#cancel").click(function(){
+			history.go(-1);
+		});
+	});
+</script>
+<link rel="stylesheet" href="../css/board.css"/>
+</head>
+<body>
+	<h1>게시판 글 쓰기</h1>
+	<form action = "update.jsp" method="post">
+	<table>
+		
+		<tbody>
+<!-- 데이터를 입력하는  -->
+	<tr>
+		<th>번호</th>
+		<td><input name="no" size="10" readonly="readonly" value="${boardDTO.no }"/></td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td><input name="title" size="60" maxlength="100" value="${boardDTO.title }"/></td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td><textarea rows="5" cols="60" name="content" >${boardDTO.content }</textarea></td>
+	<tr/>
+	<tr>
+		<th>작성자</th>
+		<td><input name="writer" size="10" maxlength="10" value="${boardDTO.writer }"/></td>
+	</tr>
+</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2">
+					<button >등록</button>
+					<button type="reset">새로고침</button>
+					<button type="button" id="cancel">취소</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+</body>
+</html>
