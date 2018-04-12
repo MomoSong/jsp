@@ -9,6 +9,15 @@ public class MemberDTO {
 	private String password;
 	private Date regDate;
 	
+	public MemberDTO(String id, String name, String password, Date regDate) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.regDate = regDate;
+	}
+
+	public MemberDTO() {}
+	
 	public String getId() {
 		return id;
 	}
