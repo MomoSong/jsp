@@ -20,6 +20,19 @@
   				$("#password").focus();
   				return false; // submit을 무시 시킨다. 반드시 submit호출을한 함수에서 return false한다.
   			}
+//   			alert($("#resCheck").text());
+  			if($("#resCheck").text()=="중복된 아이디 입니다."){
+  				alert("중복된 아이디 입니다. 다른 아이디를 선택하세요.");
+  				$("#id").focus();
+  				return false;
+  			}
+  		});
+  		$("#id").keyup(function(){
+//   			alert($(this).val());
+			var data = $(this).val();
+			if(data != "")
+  				$("#resCheck").load("checkId.do?id="+data);
+			else $("#resCheck").text("");
   		});
   	});
   </script>
@@ -39,6 +52,7 @@
 	      <label for="id">아이디</label>
 	      <input type="text" class="form-control" id="id" name="id" required="required"
 	      pattern="^[A-Za-z][A-Za-z0-9]{3,49}" placeholder="아이디 입력" />
+	      <div id="resCheck"></div>
 	    </div>
 	    <div>
 	      <label for="name">이름</label>

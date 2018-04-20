@@ -1,0 +1,24 @@
+<%@page import="com.webjjang.board.service.BoardUpdateService"%>
+<%@page import="com.webjjang.board.dto.BoardDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// 한글처리
+request.setCharacterEncoding("utf-8");
+// 데이터를 받는다.
+BoardDTO boardDTO 
+= new BoardDTO(
+		request.getParameter("title"),
+		request.getParameter("content"),
+		request.getParameter("writer")
+		);
+// 글수정에 필요한 글번호와 함께 넣는 생성자는 만들지 않아 없으므로 번호는 따로 넣는다.
+boardDTO.setNo(Integer.parseInt(request.getParameter("no")));
+
+// DB에 넣는다.
+BoardUpdateService boardUpdateService
+= new BoardUpdateService();
+boardUpdateService.process(boardDTO);
+// 자동으로 글보기로 간다. 갈때 글번호를 가져 간다.
+response.sendRedirect("view.jsp?no="+boardDTO.getNo());
+%>

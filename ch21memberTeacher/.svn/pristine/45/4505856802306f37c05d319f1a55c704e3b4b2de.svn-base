@@ -1,0 +1,103 @@
+package com.webjjang.board.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.webjjang.util.Beans;
+import com.webjjang.util.ServiceInterface;
+
+/**
+ * Servlet implementation class BoardController
+ */
+public class BoardController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println(getClass().getName()+".doGet()");
+		String command = Beans.getURI(request);
+		// 기본으로는 forward 시킨 jsp 파일명을 저장한다. 앞에 redirect:이라고 붙이면 redirect 시킨 uri를 저장한다.
+		String jsp = "";
+		// 실행할 Service를 담는 객체선언
+		ServiceInterface service = null;
+		System.out.println(command);
+		try {
+			switch (command) {
+			// 리스트
+			case "/board/list.do":
+				// 리스트에 뿌릴 데이터를 가져오자. - BoardListService가 필요하다.
+				service = Beans.getService(command);
+				// 처리를해서 DB에 있는 데이터를 받아와서 request에 담아 둔다.
+				request.setAttribute("list", service.excute(null));
+				// jsp 이름을 만들어 내고 밑에서 forward 시킨다.
+				jsp = Beans.getJsp(command);
+				System.out.println(jsp);
+				break;
+			// 아이디 중복 체크한다. Ajax로 요청된다.
+			case "/member/checkId.do":
+				String id = request.getParameter("id");
+				PrintWriter out = response.getWriter();
+				try {
+					if((boolean) Beans.getService(command).excute(id)) {
+						out.print("<span style=\"color:blue\">사용가능한 아이디 입니다.</span>");
+					}else {
+						out.print("<span style=\"color:red\">중복된 아이디 입니다.<span>");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+	//				e.printStackTrace();
+					throw new ServletException(e);
+				}
+				return;
+				
+			// 로그인 폼
+			case "/member/login.do":
+				// jsp 이름을 만들어 내고 밑에서 forward 시킨다.
+				jsp = Beans.getJsp(command);
+				System.out.println(jsp);
+				break;
+			// 로그인 폼
+			case "/member/logout.do":
+				// 로그아웃 처리
+				request.getSession().invalidate();
+				// jsp 이름을 만들어 내고 밑에서 forward 시킨다.
+				jsp = "redirect:"+request.getContextPath()+"/main/main.do";
+				System.out.println(jsp);
+				break;
+	
+			default:
+				System.out.println("존재하지 않는 자원을 요청");
+				jsp="/WEB-INF/views/error/404.jsp";
+				break;
+			}
+			if(jsp.indexOf("redirect:") == -1) // redirect: 존재하지 않는다.
+				// jsp쪽으로 이동한다.
+				request.getRequestDispatcher(jsp).forward(request, response);
+			else {// redirect: 존재한다.
+				jsp = jsp.substring("redirect:".length());
+				// uri쪽으로 이동한다.
+				response.sendRedirect(jsp);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new ServletException(e);
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}

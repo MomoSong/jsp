@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import com.webjjang.board.dao.BoardDAO;
 import com.webjjang.member.dao.MemberDAO;
 
 /**
@@ -57,6 +58,7 @@ public class Beans extends HttpServlet {
 
 		// =========== dao 생성해서 저장하는 처리문. - 모든 DAO 프로그램을 다 생성해 놓는다. ================ //
 		daoBeans.put("memberDAO", new MemberDAO());
+		daoBeans.put("boardDAO", new BoardDAO());
 		
 
 		// ======== service를 생성해서 저장하는 프로그램 작성 =============

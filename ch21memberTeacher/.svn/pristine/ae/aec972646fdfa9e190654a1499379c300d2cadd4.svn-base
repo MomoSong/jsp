@@ -1,0 +1,17 @@
+package com.webjjang.board.service;
+
+import com.webjjang.board.dao.BoardDAO;
+import com.webjjang.board.dto.BoardDTO;
+
+public class BoardViewService {
+	public BoardDTO process(int no, boolean isView){
+		System.out.println("BoardViewService.process()");
+		BoardDTO boardDTO = null;
+		// list에 데이터를 가져와서 채우는 프로그램 작성
+		// 객체 생성하고 호출
+		BoardDAO boardDAO = new BoardDAO();
+		if(isView) boardDAO.increase(no); // 글보기일 때만 조회수 1증가
+		boardDTO = boardDAO.view(no);
+		return boardDTO;
+	}
+}

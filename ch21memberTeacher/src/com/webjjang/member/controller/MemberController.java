@@ -41,9 +41,9 @@ public class MemberController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			try {
 				if((boolean) Beans.getService(command).excute(id)) {
-					out.print("<span style=\"color=blue\">사용가능한 아이디 입니다.</span>");
+					out.print("<span style=\"color:blue\">사용가능한 아이디 입니다.</span>");
 				}else {
-					out.print("<span style=\"color=red\">중복된 아이디 입니다.<span>");
+					out.print("<span style=\"color:red\">중복된 아이디 입니다.<span>");
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
