@@ -1,6 +1,6 @@
-<%@page import="com.webjjang.board.dto.BoardDTO"%>
+<%@page import="com.iw.news.board.dto.BoardDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.webjjang.board.service.BoardListService"%>
+<%@page import="com.iw.news.board.service.BoardListService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%

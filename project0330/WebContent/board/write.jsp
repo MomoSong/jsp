@@ -1,5 +1,5 @@
-<%@page import="com.webjjang.board.service.BoardWriteService"%>
-<%@page import="com.webjjang.board.dto.BoardDTO"%>
+<%@page import="com.iw.news.board.service.BoardWriteService"%>
+<%@page import="com.iw.news.board.dto.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
